@@ -1,41 +1,77 @@
-# HTML Hello
+# 📊 InfluMetrics: un dashboard sencillo en Tailwind CSS
 
-The most basic boilerplate for any 4Geeks Academy student, start your very first website from scratch.
+Dashboard de reporte para una influencer que promociona productos de marcas en **Instagram, TikTok y YouTube**. Reúne en una sola página los datos de todas sus redes para responder rápido a preguntas como:
 
-> There is a video tutorial on [how to use this template to create your very first website here](https://youtu.be/dfbDCMu_p-0).
+- ¿Cuánto dinero estoy generando en comisiones?
+- ¿Qué productos generan más ingresos?
+- ¿Qué tan bien convierten mis anuncios (conversiones / alcance)?
+- ¿Qué plataformas dan mejor retorno (ingresos / costes)?
+- ¿Cuál es el engagement rate por plataforma y por producto?
 
-## What to do next?
+**Contexto del negocio:** promociona 3 productos (A: 50 €, B: 120 €, C: 80 €) y recibe un **15% de comisión** por cada venta. Los datos del dashboard son de ejemplo.
 
-Create an `index.html` file with the [basic HTML structure](http://4geeks.com/lesson/what-is-html-learn-html#page-structure) and see it live by running a web-server using the following command:
+## 🛠️ Tecnologías
+
+- **HTML5**
+- **Tailwind CSS v4**, cargado desde el CDN oficial para navegador:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+```
+
+Todo el diseño se hace con clases utility, sin JavaScript y sin CSS personalizado. Los colores de marca (`instagram`, `tiktok`, `youtube`, `brand`) se definen con la directiva `@theme` de Tailwind v4 en un bloque `<style type="text/tailwindcss">`.
+
+## 🧱 Estructura del dashboard
+
+### 1️⃣ Bloque superior: KPIs
+Seis indicadores principales: comisiones generadas, ventas totales, tasa de conversión, retorno (ingresos/costes), engagement rate y precio medio de venta. Cada uno muestra su variación respecto al periodo anterior.
+
+### 2️⃣ Bloque intermedio: drivers
+- Evolución mensual de comisiones (gráfico de barras)
+- Funnel de conversión: alcance → interacciones → clics → carrito → compra
+- Reparto de comisiones y ROI por plataforma (gráfico de donut con `conic-gradient`)
+- Rendimiento por producto (comisión y conversión)
+- Engagement por plataforma (me gusta, comentarios, compartidos y guardados)
+- Actividad publicada (posts, stories, reels, vídeos y shorts)
+
+### 3️⃣ Bloque inferior: detalles operacionales
+- **Tabla de productos:** precio, ventas, comisión, conversión y ROI
+- **Tabla de plataformas:** alcance, engagement, conversiones y ROI, con 🏆 en la mejor plataforma de cada métrica
+- **Tabla de campañas:** fechas, producto, plataforma, resultados y rendimiento
+- **Alertas:** caídas de conversión, picos y anomalías
+- **Rankings con filtros:** top productos, top plataformas, top campañas y oportunidades de mejora. Los filtros funcionan solo con CSS (radios + variantes `has-checked:` y `group-has-[…]:`)
+
+## 📱 Diseño responsive (mobile-first)
+
+El diseño parte de una sola columna en móvil y se amplía con los breakpoints de Tailwind:
+
+| Breakpoint | Ancho | Cambios principales |
+|---|---|---|
+| base | < 640px | 1 columna, menú hamburguesa (checkbox + `peer-checked:`) |
+| `sm` | ≥ 640px | KPIs en 2 columnas |
+| `md` | ≥ 768px | Drivers en 2 columnas, cabecera en fila |
+| `lg` | ≥ 1024px | Barra lateral fija, KPIs en 3 columnas |
+| `xl` | ≥ 1280px | Drivers en 3 columnas, tablas lado a lado |
+| `2xl` | ≥ 1536px | Los 6 KPIs en una sola fila |
+
+Las tablas hacen scroll horizontal dentro de su tarjeta, así la página nunca se desborda en pantallas pequeñas.
+
+## 🚀 Cómo verlo
+
+Abre `index.html` en el navegador o levanta el servidor incluido:
 
 ```bash
-$ pip3 install flask && python3 server.py
+pip3 install flask && python3 server.py
 ```
 
-- You can create as many HTML files as you want.
-- You can also create CSS files and import them into your website using a `<link>` tag placed between the `<head></head>` tags, like this:
+## 📁 Archivos
 
-```html
-<head>
-  ...
-  <link rel="stylesheet" type="text/css" href="styles.css">
-  ...
-</head>
+```
+├── index.html   # Dashboard completo (HTML + clases de Tailwind CSS v4)
+├── server.py    # Servidor local de la plantilla de 4Geeks
+└── README.md
 ```
 
-- If you want to use Tailwind CSS, add it optionally via the official Tailwind CSS v4 CDN inside the same `<head>`:
+---
 
-```html
-<head>
-  ...
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <link rel="stylesheet" type="text/css" href="styles.css">
-  ...
-</head>
-```
-
-### Contributors
-
-This template was built as part of the [Full Stack Developer course](https://4geeksacademy.com/us/coding-bootcamps/part-time-full-stack-developer) at [4Geeks Academy Coding Bootcamp](https://4geeksacademy.com/us/coding-bootcamp) by [Alejandro Sanchez](https://twitter.com/alesanchezr) and [many other contributors](https://github.com/4GeeksAcademy/html-hello/graphs/contributors).
-
-You can find other templates and resources like this at the [school's GitHub page](https://github.com/4geeksacademy/).
+Proyecto realizado para [4Geeks Academy](https://4geeksacademy.com/es) a partir de la plantilla [html-hello](https://github.com/4GeeksAcademy/html-hello).

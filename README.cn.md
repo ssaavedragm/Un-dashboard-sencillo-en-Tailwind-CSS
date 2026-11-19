@@ -1,37 +1,77 @@
-# HTML Hello
+# 📊 InfluMetrics: un dashboard sencillo en Tailwind CSS
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io#https://github.com/4GeeksAcademy/html-hello.git)
+Dashboard de reporte para una influencer que promociona productos de marcas en **Instagram, TikTok y YouTube**. Reúne en una sola página los datos de todas sus redes para responder rápido a preguntas como:
 
-为使用 [gitpod.io](gitpod.io) 代码编辑器 4Geeks Academy 学生提供的最基础的样板。
+- ¿Cuánto dinero estoy generando en comisiones?
+- ¿Qué productos generan más ingresos?
+- ¿Qué tan bien convierten mis anuncios (conversiones / alcance)?
+- ¿Qué plataformas dan mejor retorno (ingresos / costes)?
+- ¿Cuál es el engagement rate por plataforma y por producto?
 
-[![How to open html/css preview of my project in gitpod](https://github.com/4GeeksAcademy/Templates-Boilerplates/blob/master/assets/hello-html-intro.png?raw=true)](https://youtu.be/dfbDCMu_p-0)
+**Contexto del negocio:** promociona 3 productos (A: 50 €, B: 120 €, C: 80 €) y recibe un **15% de comisión** por cada venta. Los datos del dashboard son de ejemplo.
 
-## 接下来怎么做？
+## 🛠️ Tecnologías
 
-创建一个具有 [基本 HTML 页面结构](http://content.breatheco.de/lesson/what-is-html-learn-html#page-structure) 的 `index.html` 文件并通过使用以下命令，实时预览 Web 服务器提供的 HTML 页面：
-
-```sh
-$ pip3 install flask && python3 server.py
-```
-
-- 您可以根据需要创建任意数量的 HTML 文件
-- 您还可以使用放置在 `<head></head>` 标签之间的 `<link>` 标签创建 CSS 文件并将它们导入您的网站，如下所示：
+- **HTML5**
+- **Tailwind CSS v4**, cargado desde el CDN oficial para navegador:
 
 ```html
-<head>
-  ...
-  <link rel="stylesheet" type="text/css" href="styles.css">
-  ...
-</head>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 ```
 
-- 如果你想使用 Tailwind CSS，也可以选择在同一个 `<head>` 中通过官方的 Tailwind CSS v4 CDN 引入：
+Todo el diseño se hace con clases utility, sin JavaScript y sin CSS personalizado. Los colores de marca (`instagram`, `tiktok`, `youtube`, `brand`) se definen con la directiva `@theme` de Tailwind v4 en un bloque `<style type="text/tailwindcss">`.
 
-```html
-<head>
-  ...
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <link rel="stylesheet" type="text/css" href="styles.css">
-  ...
-</head>
+## 🧱 Estructura del dashboard
+
+### 1️⃣ Bloque superior: KPIs
+Seis indicadores principales: comisiones generadas, ventas totales, tasa de conversión, retorno (ingresos/costes), engagement rate y precio medio de venta. Cada uno muestra su variación respecto al periodo anterior.
+
+### 2️⃣ Bloque intermedio: drivers
+- Evolución mensual de comisiones (gráfico de barras)
+- Funnel de conversión: alcance → interacciones → clics → carrito → compra
+- Reparto de comisiones y ROI por plataforma (gráfico de donut con `conic-gradient`)
+- Rendimiento por producto (comisión y conversión)
+- Engagement por plataforma (me gusta, comentarios, compartidos y guardados)
+- Actividad publicada (posts, stories, reels, vídeos y shorts)
+
+### 3️⃣ Bloque inferior: detalles operacionales
+- **Tabla de productos:** precio, ventas, comisión, conversión y ROI
+- **Tabla de plataformas:** alcance, engagement, conversiones y ROI, con 🏆 en la mejor plataforma de cada métrica
+- **Tabla de campañas:** fechas, producto, plataforma, resultados y rendimiento
+- **Alertas:** caídas de conversión, picos y anomalías
+- **Rankings con filtros:** top productos, top plataformas, top campañas y oportunidades de mejora. Los filtros funcionan solo con CSS (radios + variantes `has-checked:` y `group-has-[…]:`)
+
+## 📱 Diseño responsive (mobile-first)
+
+El diseño parte de una sola columna en móvil y se amplía con los breakpoints de Tailwind:
+
+| Breakpoint | Ancho | Cambios principales |
+|---|---|---|
+| base | < 640px | 1 columna, menú hamburguesa (checkbox + `peer-checked:`) |
+| `sm` | ≥ 640px | KPIs en 2 columnas |
+| `md` | ≥ 768px | Drivers en 2 columnas, cabecera en fila |
+| `lg` | ≥ 1024px | Barra lateral fija, KPIs en 3 columnas |
+| `xl` | ≥ 1280px | Drivers en 3 columnas, tablas lado a lado |
+| `2xl` | ≥ 1536px | Los 6 KPIs en una sola fila |
+
+Las tablas hacen scroll horizontal dentro de su tarjeta, así la página nunca se desborda en pantallas pequeñas.
+
+## 🚀 Cómo verlo
+
+Abre `index.html` en el navegador o levanta el servidor incluido:
+
+```bash
+pip3 install flask && python3 server.py
 ```
+
+## 📁 Archivos
+
+```
+├── index.html   # Dashboard completo (HTML + clases de Tailwind CSS v4)
+├── server.py    # Servidor local de la plantilla de 4Geeks
+└── README.md
+```
+
+---
+
+Proyecto realizado para [4Geeks Academy](https://4geeksacademy.com/es) a partir de la plantilla [html-hello](https://github.com/4GeeksAcademy/html-hello).
